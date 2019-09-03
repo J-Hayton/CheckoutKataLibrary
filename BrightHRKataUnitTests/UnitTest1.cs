@@ -13,7 +13,7 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-            checkout = new Checkout;
+            checkout = new Checkout();
             list = new List<Tuple<string, int>>();
 
         }

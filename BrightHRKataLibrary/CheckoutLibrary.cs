@@ -1,24 +1,34 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BrightHRKataLibrary
 {
-    public class CheckoutLibrary
+    public interface ICheckoutLibrary
     {
-        interface ICheckout
-        {
-            void Scan(string item);
+        void Scan(string item, ref List<Tuple<string,int>> list);
 
-            int GetTotalPrice();
+        int GetTotal();
+    }
+
+    public class Checkout : ICheckoutLibrary
+    {
+
+        void ICheckoutLibrary.Scan(string item, ref List<Tuple<string, int>> list)
+        {
+            if (list.Any(m => m.Item1 == item))
+            {
+
+                list[list.FindIndex(m => m.Item1 == item)] = new Tuple<string, int>(item, list[list.FindIndex(m => m.Item1 == item)].Item2 + 1);
+            }
+            else
+            {
+                list.Add(new Tuple<string, int>(item, 1));
+            }
         }
 
-        void Scan (string item)
+        int ICheckoutLibrary.GetTotal()
         {
-
-        }
-
-        int GetToalPrice()
-        {
-
             return 0;
         }
     }

@@ -13,7 +13,7 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-            checkout = new Checkout();
+            checkout = new Checkout;
             list = new List<Tuple<string, int>>();
 
         }
@@ -26,7 +26,8 @@ namespace Tests
 
             string item = "A";
 
-            checkout.Scan(item, list);
+            ((ICheckoutLibrary)checkout).Scan(item, ref list);
+            
 
             Assert.AreEqual(list, controlList);
         }
@@ -42,7 +43,7 @@ namespace Tests
 
             string item = "A";
 
-            checkout.Scan(item, list);
+            ((ICheckoutLibrary)checkout).Scan(item, ref list);
 
             Assert.AreEqual(list, controlList);
         }
@@ -57,7 +58,7 @@ namespace Tests
 
             string item = "A";
 
-            checkout.Scan(item, list);
+            ((ICheckoutLibrary)checkout).Scan(item, ref list);
 
             Assert.AreEqual(list, controlList);
         }

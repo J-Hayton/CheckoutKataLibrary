@@ -13,7 +13,6 @@ namespace BrightHRKataLibrary
 
     public class Checkout : ICheckoutLibrary
     {
-
         void ICheckoutLibrary.Scan(string item, ref List<Tuple<string, int>> list)
         {
             if (list.Any(m => m.Item1 == item))
@@ -29,7 +28,40 @@ namespace BrightHRKataLibrary
 
         int ICheckoutLibrary.GetTotal(ref List<Tuple<string, int>> list)
         {
-            return 0;
+
+            int totalCost = 0;
+            if (list.Any())
+            {
+                foreach (Tuple<string, int> item in list)
+                {
+                    switch (item.Item1)
+                    {
+                        case "A":
+                            totalCost += ((item.Item2 / 3) * 130);
+                            totalCost += (item.Item2 % 3) * 50;
+                            break;
+
+                        case "B":
+                            totalCost += ((item.Item2 / 2) * 45);
+                            totalCost += (item.Item2 % 2) * 30;
+                            break;
+
+                        case "C":
+                            totalCost += (item.Item2 * 20);
+                            break;
+
+                        case "D":
+                            totalCost += (item.Item2 * 15);
+                            break;
+                    }
+
+                }
+                return totalCost; 
+            }
+            else
+            {
+                return totalCost;
+            }
         }
     }
 }

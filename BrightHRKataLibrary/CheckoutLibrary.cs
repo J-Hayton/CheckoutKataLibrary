@@ -8,7 +8,7 @@ namespace BrightHRKataLibrary
     {
         void Scan(string item, ref List<Tuple<string,int>> list);
 
-        int GetTotal();
+        int GetTotal(ref List<Tuple<string, int>> list);
     }
 
     public class Checkout : ICheckoutLibrary
@@ -27,7 +27,7 @@ namespace BrightHRKataLibrary
             }
         }
 
-        int ICheckoutLibrary.GetTotal()
+        int ICheckoutLibrary.GetTotal(ref List<Tuple<string, int>> list)
         {
             return 0;
         }

@@ -68,9 +68,8 @@ namespace Tests
         public void GetTotal_TestSingleItem()
         {
             int controlPrice = 15;
-            string item = "D";
 
-            ((ICheckoutLibrary)checkout).Scan(item,ref list);
+            list.Add(new Tuple<string, int>("D", 1));
 
             Assert.AreEqual(((ICheckoutLibrary)checkout).GetTotal(ref list), controlPrice);
         }
@@ -79,11 +78,9 @@ namespace Tests
         public void GetTotal_TestMultiItems()
         {
             int controlPrice = 65;
-            string item1 = "D";
-            string item2 = "A";
 
-            ((ICheckoutLibrary)checkout).Scan(item1, ref list);
-            ((ICheckoutLibrary)checkout).Scan(item2, ref list);
+            list.Add(new Tuple<string, int>("A", 1));
+            list.Add(new Tuple<string, int>("D", 1));
 
             Assert.AreEqual(((ICheckoutLibrary)checkout).GetTotal(ref list), controlPrice);
         }
@@ -92,11 +89,8 @@ namespace Tests
         public void GetTotal_TestBulkSpecialItems()
         {
             int controlPrice = 130;
-            string item1 = "A";
 
-            ((ICheckoutLibrary)checkout).Scan(item1, ref list);
-            ((ICheckoutLibrary)checkout).Scan(item1, ref list);
-            ((ICheckoutLibrary)checkout).Scan(item1, ref list);
+            list.Add(new Tuple<string, int>("A", 3));
 
             Assert.AreEqual(((ICheckoutLibrary)checkout).GetTotal(ref list), controlPrice);
         }
@@ -105,12 +99,8 @@ namespace Tests
         public void GetTotal_TestBulkSpecialItemsUneven()
         {
             int controlPrice = 180;
-            string item1 = "A";
 
-            ((ICheckoutLibrary)checkout).Scan(item1, ref list);
-            ((ICheckoutLibrary)checkout).Scan(item1, ref list);
-            ((ICheckoutLibrary)checkout).Scan(item1, ref list);
-            ((ICheckoutLibrary)checkout).Scan(item1, ref list);
+            list.Add(new Tuple<string, int>("A", 4));
 
             Assert.AreEqual(((ICheckoutLibrary)checkout).GetTotal(ref list), controlPrice);
         }

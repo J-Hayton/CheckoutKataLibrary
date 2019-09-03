@@ -1,4 +1,4 @@
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using BrightHRKataLibrary;
 using System;
 using System.Collections.Generic;
@@ -103,6 +103,36 @@ namespace Tests
             list.Add(new Tuple<string, int>("A", 4));
 
             Assert.AreEqual(((ICheckoutLibrary)checkout).GetTotal(ref list), controlPrice);
+        }
+
+        [Test]
+        public void CompleteTest_MultipleOfAllItems_ScanAndGetTotal()
+        {
+            int controlPrice = 485;
+
+            ((ICheckoutLibrary)checkout).Scan("A", ref list);
+            ((ICheckoutLibrary)checkout).Scan("A", ref list);
+            ((ICheckoutLibrary)checkout).Scan("A", ref list);
+            ((ICheckoutLibrary)checkout).Scan("A", ref list);
+            ((ICheckoutLibrary)checkout).Scan("A", ref list);
+            ((ICheckoutLibrary)checkout).Scan("A", ref list);
+            ((ICheckoutLibrary)checkout).Scan("A", ref list);
+
+            ((ICheckoutLibrary)checkout).Scan("B", ref list);
+            ((ICheckoutLibrary)checkout).Scan("B", ref list);
+            ((ICheckoutLibrary)checkout).Scan("B", ref list);
+
+            ((ICheckoutLibrary)checkout).Scan("C", ref list);
+            ((ICheckoutLibrary)checkout).Scan("C", ref list);
+
+            ((ICheckoutLibrary)checkout).Scan("D", ref list);
+            ((ICheckoutLibrary)checkout).Scan("D", ref list);
+            ((ICheckoutLibrary)checkout).Scan("D", ref list);
+            ((ICheckoutLibrary)checkout).Scan("D", ref list);
+
+            int testTotal = ((ICheckoutLibrary)checkout).GetTotal(ref list);
+
+            Assert.AreEqual(testTotal, controlPrice);
         }
     }
 }
